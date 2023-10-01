@@ -45,6 +45,7 @@ all_df = pd.read_csv(
     sep="you_delimiter",
     header=None,
 )
+print(all_df)
 datetime_columns = ["order_purchase_timestamp_y", "order_delivered_customer_date_y"]
 all_df.sort_values(by="order_purchase_timestamp_y", inplace=True)
 all_df.reset_index(inplace=True)
