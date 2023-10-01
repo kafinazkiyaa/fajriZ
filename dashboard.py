@@ -41,7 +41,9 @@ def create_Q2_df(df):
 
 
 all_df = pd.read_csv(
-    "https://github.com/kafinazkiyaa/fajriZ/blob/main/all_df", error_bad_lines=False
+    "https://github.com/kafinazkiyaa/fajriZ/blob/main/all_df",
+    sep="you_delimiter",
+    header=None,
 )
 datetime_columns = ["order_purchase_timestamp_y", "order_delivered_customer_date_y"]
 all_df.sort_values(by="order_purchase_timestamp_y", inplace=True)
