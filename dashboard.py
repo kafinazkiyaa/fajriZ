@@ -45,8 +45,8 @@ all_df = pd.read_csv(
     sep="you_delimiter",
     header=None,
 )
-datetime_columns = ["order_purchase_timestamp", "order_delivered_customer_date_y"]
-all_df.sort_values(by="order_purchase_timestamp", inplace=True)
+datetime_columns = ["order_purchase_timestamp_x", "order_delivered_customer_date_y"]
+all_df.sort_values(by="order_purchase_timestamp_x", inplace=True)
 all_df.reset_index(inplace=True)
 
 for column in datetime_columns:
@@ -54,8 +54,8 @@ for column in datetime_columns:
 
 # membuat komponen filter
 
-min_date = all_df["order_purchase_timestamp"].min()
-max_date = all_df["order_purchase_timestamp"].max()
+min_date = all_df["order_purchase_timestamp_x"].min()
+max_date = all_df["order_purchase_timestamp_x"].max()
 
 with st.sidebar:
     # Mengambil start_date & end_date dari date_input
