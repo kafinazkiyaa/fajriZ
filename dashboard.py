@@ -45,32 +45,33 @@ all_df = pd.read_csv(
     sep="you_delimiter",
     header=None,
 )
-print(all_df)
-datetime_columns = ["order_purchase_timestamp_y", "order_delivered_customer_date_y"]
-all_df.sort_values(by="order_purchase_timestamp_y", inplace=True)
-all_df.reset_index(inplace=True)
+# print(all_df)
+# datetime_columns = ["order_purchase_timestamp_y", "order_delivered_customer_date_y"]
+# all_df.sort_values(by="order_purchase_timestamp_y", inplace=True)
+# all_df.reset_index(inplace=True)
 
-for column in datetime_columns:
-    all_df[column] = pd.to_datetime(all_df[column])
+# for column in datetime_columns:
+#     all_df[column] = pd.to_datetime(all_df[column])
 
-# membuat komponen filter
+# # membuat komponen filter
 
-min_date = all_df["order_purchase_timestamp_y"].min()
-max_date = all_df["order_purchase_timestamp_y"].max()
+# min_date = all_df["order_purchase_timestamp_y"].min()
+# max_date = all_df["order_purchase_timestamp_y"].max()
 
-with st.sidebar:
-    # Mengambil start_date & end_date dari date_input
-    start_date, end_date = st.date_input(
-        label="Rentang Waktu",
-        min_value=min_date,
-        max_value=max_date,
-        value=[min_date, max_date],
-    )
+# with st.sidebar:
+#     # Mengambil start_date & end_date dari date_input
+#     start_date, end_date = st.date_input(
+#         label="Rentang Waktu",
+#         min_value=min_date,
+#         max_value=max_date,
+#         value=[min_date, max_date],
+#     )
 
-main_df = all_df[
-    (all_df["order_purchase_timestamp_y"] >= str(start_date))
-    & (all_df["order_purchase_timestamp_y"] <= str(end_date))
-]
+main_df = all_df
+# [
+#     (all_df["order_purchase_timestamp_y"] >= str(start_date))
+#     & (all_df["order_purchase_timestamp_y"] <= str(end_date))
+# ]
 
 Q1_df = create_Q1_df(main_df)
 Q2_df = create_Q2_df(main_df)
