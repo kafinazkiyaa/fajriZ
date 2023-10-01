@@ -40,7 +40,7 @@ def create_Q2_df(df):
     return Q2_df
 
 
-all_df = pd.read_csv("all_df")
+all_df = pd.read_csv("all_df.csv")
 datetime_columns = ["order_purchase_timestamp_y", "order_delivered_customer_date_y"]
 all_df.sort_values(by="order_purchase_timestamp_y", inplace=True)
 all_df.reset_index(inplace=True)
@@ -53,8 +53,8 @@ for column in datetime_columns:
 min_date = all_df["order_purchase_timestamp_y"].min()
 max_date = all_df["order_purchase_timestamp_y"].max()
 
+# ...
 with st.sidebar:
-    # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
         label="Rentang Waktu",
         min_value=min_date,
@@ -63,10 +63,9 @@ with st.sidebar:
     )
 
 main_df = all_df
-[
-    (all_df["order_purchase_timestamp_y"] >= str(start_date))
-    & (all_df["order_purchase_timestamp_y"] <= str(end_date))
-]
+selected_data = (all_df["order_purchase_timestamp_y"] >= str(start_date)) & (
+    all_df["order_purchase_timestamp_y"] <= str(end_date)
+)
 
 Q1_df = create_Q1_df(main_df)
 Q2_df = create_Q2_df(main_df)
@@ -112,10 +111,9 @@ st.pyplot(fig)
 
 st.subheader("Penjualan Terbanyak Berdasarkan Kota (Top 10)")
 
-
 # Mengambil 10 data tertinggi
-
 top_10_cities = Q2_df.sort_values(by="order_item_id", ascending=False).head(10)
+
 
 plt.figure(figsize=(10, 5))
 colors_ = [
@@ -133,4 +131,5 @@ colors_ = [
 
 sns.barplot(x="order_item_id", y="customer_city", data=top_10_cities, palette=colors_)
 
-st.pyplot(fig)
+st.set_option("deprecation.showPyplotGlobalUse", False)
+st.pyplot()
