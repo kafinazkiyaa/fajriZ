@@ -40,9 +40,7 @@ def create_Q2_df(df):
     return Q2_df
 
 
-all_df = pd.read_csv(
-    "https://github.com/kafinazkiyaa/submission/blob/main/all_df.csv", sep=";"
-)
+all_df = pd.read_csv("https://github.com/kafinazkiyaa/fajriZ/blob/main/all_df.csv")
 datetime_columns = ["order_purchase_timestamp_y", "order_delivered_customer_date_y"]
 all_df.sort_values(by="order_purchase_timestamp_y", inplace=True)
 all_df.reset_index(inplace=True)
