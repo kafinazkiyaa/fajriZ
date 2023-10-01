@@ -40,38 +40,34 @@ def create_Q2_df(df):
     return Q2_df
 
 
-all_df = pd.read_csv(
-    "https://github.com/kafinazkiyaa/fajriZ/blob/main/all_df",
-    sep="you_delimiter",
-    header=None,
-)
-# print(all_df)
-# datetime_columns = ["order_purchase_timestamp_y", "order_delivered_customer_date_y"]
-# all_df.sort_values(by="order_purchase_timestamp_y", inplace=True)
-# all_df.reset_index(inplace=True)
+all_df = pd.read_csv("all_df")
 
-# for column in datetime_columns:
-#     all_df[column] = pd.to_datetime(all_df[column])
+datetime_columns = ["order_purchase_timestamp_y", "order_delivered_customer_date_y"]
+all_df.sort_values(by="order_purchase_timestamp_y", inplace=True)
+all_df.reset_index(inplace=True)
 
-# # membuat komponen filter
+for column in datetime_columns:
+    all_df[column] = pd.to_datetime(all_df[column])
 
-# min_date = all_df["order_purchase_timestamp_y"].min()
-# max_date = all_df["order_purchase_timestamp_y"].max()
+# membuat komponen filter
 
-# with st.sidebar:
-#     # Mengambil start_date & end_date dari date_input
-#     start_date, end_date = st.date_input(
-#         label="Rentang Waktu",
-#         min_value=min_date,
-#         max_value=max_date,
-#         value=[min_date, max_date],
-#     )
+min_date = all_df["order_purchase_timestamp_y"].min()
+max_date = all_df["order_purchase_timestamp_y"].max()
+
+with st.sidebar:
+    # Mengambil start_date & end_date dari date_input
+    start_date, end_date = st.date_input(
+        label="Rentang Waktu",
+        min_value=min_date,
+        max_value=max_date,
+        value=[min_date, max_date],
+    )
 
 main_df = all_df
-# [
-#     (all_df["order_purchase_timestamp_y"] >= str(start_date))
-#     & (all_df["order_purchase_timestamp_y"] <= str(end_date))
-# ]
+[
+    (all_df["order_purchase_timestamp_y"] >= str(start_date))
+    & (all_df["order_purchase_timestamp_y"] <= str(end_date))
+]
 
 Q1_df = create_Q1_df(main_df)
 Q2_df = create_Q2_df(main_df)
